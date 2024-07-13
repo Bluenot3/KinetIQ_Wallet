@@ -1,0 +1,279 @@
+<html><head><base href="https://zen.cyberspace"><title>ZenDash - Compact Digital Life Hub</title>
+<link rel="stylesheet" href="https://embed.pickaxeproject.com/axe/scripts/inline-button/styles.css">
+<script src="https://embed.pickaxeproject.com/axe/scripts/inline-button/bundle.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+  
+  :root {
+    --primary: #6200ea;
+    --secondary: #03dac6;
+    --background: #121212;
+    --surface: #1e1e1e;
+    --on-background: #ffffff;
+    --on-surface: #e0e0e0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background);
+    color: var(--on-background);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .widget {
+    background-color: var(--surface);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .widget h2 {
+    color: var(--secondary);
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .assets {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .social-trends, .tasks, .opportunities, .automations, .news, .weather {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .ai-assistant {
+    grid-column: span 3;
+    text-align: center;
+  }
+
+  .zen-logo {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.8rem;
+    color: var(--secondary);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .live-tracker {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: pulse 2s infinite;
+  }
+
+  #asset-chart {
+    height: 200px;
+  }
+
+  #trends-list, #task-list, #opportunity-list, #news-list, #automation-status {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #trends-list li, #task-list li, #opportunity-list li, #news-list li, #automation-status div {
+    margin-bottom: 0.5rem;
+    padding: 0.3rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  #weather-info {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  /* Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+</style>
+</head><body>
+<div class="dashboard">
+  <div class="widget assets">
+    <h2>Asset Tracker</h2>
+    <canvas id="asset-chart"></canvas>
+  </div>
+
+  <div class="widget social-trends">
+    <h2>Social Trends</h2>
+    <ul id="trends-list"></ul>
+  </div>
+
+  <div class="widget tasks">
+    <h2>Tasks</h2>
+    <ul id="task-list"></ul>
+  </div>
+
+  <div class="widget opportunities">
+    <h2>Opportunities</h2>
+    <ul id="opportunity-list"></ul>
+  </div>
+
+  <div class="widget automations">
+    <h2>Automations</h2>
+    <div id="automation-status"></div>
+  </div>
+
+  <div class="widget news">
+    <h2>Top Stories</h2>
+    <ul id="news-list"></ul>
+  </div>
+
+  <div class="widget weather">
+    <h2>Weather</h2>
+    <div id="weather-info"></div>
+  </div>
+
+  <div class="widget ai-assistant">
+    <h2>AI Assistant</h2>
+    <div id="pickaxe-inline-action-btn"
+         data-formid="ZENX_HCYZ5"
+         data-frame-source="https://embed.pickaxeproject.com/axe?id=ZENX_HCYZ5&mode=embed_gold&host=beta&theme=custom&opacity=100&font_header=Libre+Franklin&size_header=32&font_body=Quicksand&size_body=16&font_labels=Quicksand&size_labels=20&font_button=Quicksand&size_button=16&c_fb=040101&c_ff=01070E&c_fbd=FFFFFF&c_rb=019FEF&c_bb=FFFFFF&c_bt=000000&c_t=FFFFFF&s_ffo=100&s_rbo=100&s_bbo=100&s_f=minimalist&s_b=filled&s_t=0.5&s_to=1&s_r=3"
+         data-title="ZEN-X"
+         data-btn-color="FFFFFF"
+         data-btn-style="filled"
+         data-border-radius="3"
+         data-border-width="0.5"
+         data-font-color="000000">
+    </div>
+  </div>
+</div>
+
+<div class="zen-logo">Powered by ZEN</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Asset Tracker
+  const assetCtx = document.getElementById('asset-chart').getContext('2d');
+  new Chart(assetCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Stocks', 'Crypto', 'Commodities', '401K'],
+      datasets: [{
+        data: [30, 20, 15, 35],
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#ffffff',
+            font: {
+              size: 10
+            }
+          }
+        }
+      },
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      }
+    }
+  });
+
+  // Social Media Trends
+  const trends = ['#ZenLife', '#CryptoSurge', '#AIRevolution', '#SustainableFuture', '#QuantumComputing'];
+  const trendsList = document.getElementById('trends-list');
+  trends.forEach(trend => {
+    const li = document.createElement('li');
+    li.textContent = trend;
+    trendsList.appendChild(li);
+  });
+
+  // Tasks
+  const tasks = ['Review portfolio', 'Team meeting', 'AI course', 'Meditate'];
+  const taskList = document.getElementById('task-list');
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.textContent = task;
+    taskList.appendChild(li);
+  });
+
+  // Opportunities
+  const opportunities = ['Emerging market invest', 'AI partnership', 'Green energy startup'];
+  const opportunityList = document.getElementById('opportunity-list');
+  opportunities.forEach(opportunity => {
+    const li = document.createElement('li');
+    li.textContent = opportunity;
+    opportunityList.appendChild(li);
+  });
+
+  // Automations
+  const automations = [
+    { name: 'Social Media Scheduler', platform: 'Buffer', status: 'active' },
+    { name: 'Email AI', platform: 'Gmail', status: 'active' },
+    { name: 'Portfolio Rebalancer', platform: 'Custom', status: 'scheduled' }
+  ];
+  const automationStatus = document.getElementById('automation-status');
+  automations.forEach(auto => {
+    const div = document.createElement('div');
+    div.innerHTML = `<span class="live-tracker"></span> ${auto.name}: ${auto.status}`;
+    automationStatus.appendChild(div);
+  });
+
+  // News
+  const news = ['Quantum Computing Breakthrough', 'Global Climate Summit Success', 'AI Surpasses Human Creativity'];
+  const newsList = document.getElementById('news-list');
+  news.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    newsList.appendChild(li);
+  });
+
+  // Weather
+  const weatherInfo = document.getElementById('weather-info');
+  weatherInfo.innerHTML = '☀️ NYC: 72°F, Partly Cloudy';
+</script>
+</body></html>
